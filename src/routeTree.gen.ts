@@ -9,38 +9,362 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIotRouteImport } from './routes/services/iot'
+import { Route as ServicesDevelopmentRouteImport } from './routes/services/development'
+import { Route as ServicesConsultingRouteImport } from './routes/services/consulting'
+import { Route as ServicesBlockchainRouteImport } from './routes/services/blockchain'
+import { Route as ServicesAiRouteImport } from './routes/services/ai'
+import { Route as ProductsTenderAlertsRouteImport } from './routes/products/tender-alerts'
+import { Route as ProductsSmsRouteImport } from './routes/products/sms'
+import { Route as ProductsFoaRouteImport } from './routes/products/foa'
+import { Route as ProductsEmsRouteImport } from './routes/products/ems'
+import { Route as OurWorkKickoffRouteImport } from './routes/our-work/kickoff'
+import { Route as OurWorkCostEstimateRouteImport } from './routes/our-work/cost-estimate'
+import { Route as OurWorkConsultationRouteImport } from './routes/our-work/consultation'
+import { Route as IndustriesTravelRouteImport } from './routes/industries/travel'
+import { Route as IndustriesOnDemandRouteImport } from './routes/industries/on-demand'
+import { Route as IndustriesManufacturingRouteImport } from './routes/industries/manufacturing'
+import { Route as IndustriesLogisticsRouteImport } from './routes/industries/logistics'
+import { Route as IndustriesInsuranceRouteImport } from './routes/industries/insurance'
+import { Route as IndustriesHealthcareRouteImport } from './routes/industries/healthcare'
+import { Route as IndustriesFintechRouteImport } from './routes/industries/fintech'
+import { Route as IndustriesEdtechRouteImport } from './routes/industries/edtech'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIotRoute = ServicesIotRouteImport.update({
+  id: '/services/iot',
+  path: '/services/iot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesDevelopmentRoute = ServicesDevelopmentRouteImport.update({
+  id: '/services/development',
+  path: '/services/development',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesConsultingRoute = ServicesConsultingRouteImport.update({
+  id: '/services/consulting',
+  path: '/services/consulting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBlockchainRoute = ServicesBlockchainRouteImport.update({
+  id: '/services/blockchain',
+  path: '/services/blockchain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesAiRoute = ServicesAiRouteImport.update({
+  id: '/services/ai',
+  path: '/services/ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsTenderAlertsRoute = ProductsTenderAlertsRouteImport.update({
+  id: '/products/tender-alerts',
+  path: '/products/tender-alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsSmsRoute = ProductsSmsRouteImport.update({
+  id: '/products/sms',
+  path: '/products/sms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsFoaRoute = ProductsFoaRouteImport.update({
+  id: '/products/foa',
+  path: '/products/foa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsEmsRoute = ProductsEmsRouteImport.update({
+  id: '/products/ems',
+  path: '/products/ems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurWorkKickoffRoute = OurWorkKickoffRouteImport.update({
+  id: '/our-work/kickoff',
+  path: '/our-work/kickoff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurWorkCostEstimateRoute = OurWorkCostEstimateRouteImport.update({
+  id: '/our-work/cost-estimate',
+  path: '/our-work/cost-estimate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurWorkConsultationRoute = OurWorkConsultationRouteImport.update({
+  id: '/our-work/consultation',
+  path: '/our-work/consultation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesTravelRoute = IndustriesTravelRouteImport.update({
+  id: '/industries/travel',
+  path: '/industries/travel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesOnDemandRoute = IndustriesOnDemandRouteImport.update({
+  id: '/industries/on-demand',
+  path: '/industries/on-demand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesManufacturingRoute = IndustriesManufacturingRouteImport.update({
+  id: '/industries/manufacturing',
+  path: '/industries/manufacturing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesLogisticsRoute = IndustriesLogisticsRouteImport.update({
+  id: '/industries/logistics',
+  path: '/industries/logistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesInsuranceRoute = IndustriesInsuranceRouteImport.update({
+  id: '/industries/insurance',
+  path: '/industries/insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesHealthcareRoute = IndustriesHealthcareRouteImport.update({
+  id: '/industries/healthcare',
+  path: '/industries/healthcare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesFintechRoute = IndustriesFintechRouteImport.update({
+  id: '/industries/fintech',
+  path: '/industries/fintech',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesEdtechRoute = IndustriesEdtechRouteImport.update({
+  id: '/industries/edtech',
+  path: '/industries/edtech',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/industries/edtech': typeof IndustriesEdtechRoute
+  '/industries/fintech': typeof IndustriesFintechRoute
+  '/industries/healthcare': typeof IndustriesHealthcareRoute
+  '/industries/insurance': typeof IndustriesInsuranceRoute
+  '/industries/logistics': typeof IndustriesLogisticsRoute
+  '/industries/manufacturing': typeof IndustriesManufacturingRoute
+  '/industries/on-demand': typeof IndustriesOnDemandRoute
+  '/industries/travel': typeof IndustriesTravelRoute
+  '/our-work/consultation': typeof OurWorkConsultationRoute
+  '/our-work/cost-estimate': typeof OurWorkCostEstimateRoute
+  '/our-work/kickoff': typeof OurWorkKickoffRoute
+  '/products/ems': typeof ProductsEmsRoute
+  '/products/foa': typeof ProductsFoaRoute
+  '/products/sms': typeof ProductsSmsRoute
+  '/products/tender-alerts': typeof ProductsTenderAlertsRoute
+  '/services/ai': typeof ServicesAiRoute
+  '/services/blockchain': typeof ServicesBlockchainRoute
+  '/services/consulting': typeof ServicesConsultingRoute
+  '/services/development': typeof ServicesDevelopmentRoute
+  '/services/iot': typeof ServicesIotRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/industries/edtech': typeof IndustriesEdtechRoute
+  '/industries/fintech': typeof IndustriesFintechRoute
+  '/industries/healthcare': typeof IndustriesHealthcareRoute
+  '/industries/insurance': typeof IndustriesInsuranceRoute
+  '/industries/logistics': typeof IndustriesLogisticsRoute
+  '/industries/manufacturing': typeof IndustriesManufacturingRoute
+  '/industries/on-demand': typeof IndustriesOnDemandRoute
+  '/industries/travel': typeof IndustriesTravelRoute
+  '/our-work/consultation': typeof OurWorkConsultationRoute
+  '/our-work/cost-estimate': typeof OurWorkCostEstimateRoute
+  '/our-work/kickoff': typeof OurWorkKickoffRoute
+  '/products/ems': typeof ProductsEmsRoute
+  '/products/foa': typeof ProductsFoaRoute
+  '/products/sms': typeof ProductsSmsRoute
+  '/products/tender-alerts': typeof ProductsTenderAlertsRoute
+  '/services/ai': typeof ServicesAiRoute
+  '/services/blockchain': typeof ServicesBlockchainRoute
+  '/services/consulting': typeof ServicesConsultingRoute
+  '/services/development': typeof ServicesDevelopmentRoute
+  '/services/iot': typeof ServicesIotRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/industries/edtech': typeof IndustriesEdtechRoute
+  '/industries/fintech': typeof IndustriesFintechRoute
+  '/industries/healthcare': typeof IndustriesHealthcareRoute
+  '/industries/insurance': typeof IndustriesInsuranceRoute
+  '/industries/logistics': typeof IndustriesLogisticsRoute
+  '/industries/manufacturing': typeof IndustriesManufacturingRoute
+  '/industries/on-demand': typeof IndustriesOnDemandRoute
+  '/industries/travel': typeof IndustriesTravelRoute
+  '/our-work/consultation': typeof OurWorkConsultationRoute
+  '/our-work/cost-estimate': typeof OurWorkCostEstimateRoute
+  '/our-work/kickoff': typeof OurWorkKickoffRoute
+  '/products/ems': typeof ProductsEmsRoute
+  '/products/foa': typeof ProductsFoaRoute
+  '/products/sms': typeof ProductsSmsRoute
+  '/products/tender-alerts': typeof ProductsTenderAlertsRoute
+  '/services/ai': typeof ServicesAiRoute
+  '/services/blockchain': typeof ServicesBlockchainRoute
+  '/services/consulting': typeof ServicesConsultingRoute
+  '/services/development': typeof ServicesDevelopmentRoute
+  '/services/iot': typeof ServicesIotRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/industries/edtech'
+    | '/industries/fintech'
+    | '/industries/healthcare'
+    | '/industries/insurance'
+    | '/industries/logistics'
+    | '/industries/manufacturing'
+    | '/industries/on-demand'
+    | '/industries/travel'
+    | '/our-work/consultation'
+    | '/our-work/cost-estimate'
+    | '/our-work/kickoff'
+    | '/products/ems'
+    | '/products/foa'
+    | '/products/sms'
+    | '/products/tender-alerts'
+    | '/services/ai'
+    | '/services/blockchain'
+    | '/services/consulting'
+    | '/services/development'
+    | '/services/iot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/industries/edtech'
+    | '/industries/fintech'
+    | '/industries/healthcare'
+    | '/industries/insurance'
+    | '/industries/logistics'
+    | '/industries/manufacturing'
+    | '/industries/on-demand'
+    | '/industries/travel'
+    | '/our-work/consultation'
+    | '/our-work/cost-estimate'
+    | '/our-work/kickoff'
+    | '/products/ems'
+    | '/products/foa'
+    | '/products/sms'
+    | '/products/tender-alerts'
+    | '/services/ai'
+    | '/services/blockchain'
+    | '/services/consulting'
+    | '/services/development'
+    | '/services/iot'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/industries/edtech'
+    | '/industries/fintech'
+    | '/industries/healthcare'
+    | '/industries/insurance'
+    | '/industries/logistics'
+    | '/industries/manufacturing'
+    | '/industries/on-demand'
+    | '/industries/travel'
+    | '/our-work/consultation'
+    | '/our-work/cost-estimate'
+    | '/our-work/kickoff'
+    | '/products/ems'
+    | '/products/foa'
+    | '/products/sms'
+    | '/products/tender-alerts'
+    | '/services/ai'
+    | '/services/blockchain'
+    | '/services/consulting'
+    | '/services/development'
+    | '/services/iot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  IndustriesEdtechRoute: typeof IndustriesEdtechRoute
+  IndustriesFintechRoute: typeof IndustriesFintechRoute
+  IndustriesHealthcareRoute: typeof IndustriesHealthcareRoute
+  IndustriesInsuranceRoute: typeof IndustriesInsuranceRoute
+  IndustriesLogisticsRoute: typeof IndustriesLogisticsRoute
+  IndustriesManufacturingRoute: typeof IndustriesManufacturingRoute
+  IndustriesOnDemandRoute: typeof IndustriesOnDemandRoute
+  IndustriesTravelRoute: typeof IndustriesTravelRoute
+  OurWorkConsultationRoute: typeof OurWorkConsultationRoute
+  OurWorkCostEstimateRoute: typeof OurWorkCostEstimateRoute
+  OurWorkKickoffRoute: typeof OurWorkKickoffRoute
+  ProductsEmsRoute: typeof ProductsEmsRoute
+  ProductsFoaRoute: typeof ProductsFoaRoute
+  ProductsSmsRoute: typeof ProductsSmsRoute
+  ProductsTenderAlertsRoute: typeof ProductsTenderAlertsRoute
+  ServicesAiRoute: typeof ServicesAiRoute
+  ServicesBlockchainRoute: typeof ServicesBlockchainRoute
+  ServicesConsultingRoute: typeof ServicesConsultingRoute
+  ServicesDevelopmentRoute: typeof ServicesDevelopmentRoute
+  ServicesIotRoute: typeof ServicesIotRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +372,175 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/iot': {
+      id: '/services/iot'
+      path: '/services/iot'
+      fullPath: '/services/iot'
+      preLoaderRoute: typeof ServicesIotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/development': {
+      id: '/services/development'
+      path: '/services/development'
+      fullPath: '/services/development'
+      preLoaderRoute: typeof ServicesDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/consulting': {
+      id: '/services/consulting'
+      path: '/services/consulting'
+      fullPath: '/services/consulting'
+      preLoaderRoute: typeof ServicesConsultingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/blockchain': {
+      id: '/services/blockchain'
+      path: '/services/blockchain'
+      fullPath: '/services/blockchain'
+      preLoaderRoute: typeof ServicesBlockchainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/ai': {
+      id: '/services/ai'
+      path: '/services/ai'
+      fullPath: '/services/ai'
+      preLoaderRoute: typeof ServicesAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/tender-alerts': {
+      id: '/products/tender-alerts'
+      path: '/products/tender-alerts'
+      fullPath: '/products/tender-alerts'
+      preLoaderRoute: typeof ProductsTenderAlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/sms': {
+      id: '/products/sms'
+      path: '/products/sms'
+      fullPath: '/products/sms'
+      preLoaderRoute: typeof ProductsSmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/foa': {
+      id: '/products/foa'
+      path: '/products/foa'
+      fullPath: '/products/foa'
+      preLoaderRoute: typeof ProductsFoaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/ems': {
+      id: '/products/ems'
+      path: '/products/ems'
+      fullPath: '/products/ems'
+      preLoaderRoute: typeof ProductsEmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-work/kickoff': {
+      id: '/our-work/kickoff'
+      path: '/our-work/kickoff'
+      fullPath: '/our-work/kickoff'
+      preLoaderRoute: typeof OurWorkKickoffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-work/cost-estimate': {
+      id: '/our-work/cost-estimate'
+      path: '/our-work/cost-estimate'
+      fullPath: '/our-work/cost-estimate'
+      preLoaderRoute: typeof OurWorkCostEstimateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-work/consultation': {
+      id: '/our-work/consultation'
+      path: '/our-work/consultation'
+      fullPath: '/our-work/consultation'
+      preLoaderRoute: typeof OurWorkConsultationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/travel': {
+      id: '/industries/travel'
+      path: '/industries/travel'
+      fullPath: '/industries/travel'
+      preLoaderRoute: typeof IndustriesTravelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/on-demand': {
+      id: '/industries/on-demand'
+      path: '/industries/on-demand'
+      fullPath: '/industries/on-demand'
+      preLoaderRoute: typeof IndustriesOnDemandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/manufacturing': {
+      id: '/industries/manufacturing'
+      path: '/industries/manufacturing'
+      fullPath: '/industries/manufacturing'
+      preLoaderRoute: typeof IndustriesManufacturingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/logistics': {
+      id: '/industries/logistics'
+      path: '/industries/logistics'
+      fullPath: '/industries/logistics'
+      preLoaderRoute: typeof IndustriesLogisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/insurance': {
+      id: '/industries/insurance'
+      path: '/industries/insurance'
+      fullPath: '/industries/insurance'
+      preLoaderRoute: typeof IndustriesInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/healthcare': {
+      id: '/industries/healthcare'
+      path: '/industries/healthcare'
+      fullPath: '/industries/healthcare'
+      preLoaderRoute: typeof IndustriesHealthcareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/fintech': {
+      id: '/industries/fintech'
+      path: '/industries/fintech'
+      fullPath: '/industries/fintech'
+      preLoaderRoute: typeof IndustriesFintechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/edtech': {
+      id: '/industries/edtech'
+      path: '/industries/edtech'
+      fullPath: '/industries/edtech'
+      preLoaderRoute: typeof IndustriesEdtechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  IndustriesEdtechRoute: IndustriesEdtechRoute,
+  IndustriesFintechRoute: IndustriesFintechRoute,
+  IndustriesHealthcareRoute: IndustriesHealthcareRoute,
+  IndustriesInsuranceRoute: IndustriesInsuranceRoute,
+  IndustriesLogisticsRoute: IndustriesLogisticsRoute,
+  IndustriesManufacturingRoute: IndustriesManufacturingRoute,
+  IndustriesOnDemandRoute: IndustriesOnDemandRoute,
+  IndustriesTravelRoute: IndustriesTravelRoute,
+  OurWorkConsultationRoute: OurWorkConsultationRoute,
+  OurWorkCostEstimateRoute: OurWorkCostEstimateRoute,
+  OurWorkKickoffRoute: OurWorkKickoffRoute,
+  ProductsEmsRoute: ProductsEmsRoute,
+  ProductsFoaRoute: ProductsFoaRoute,
+  ProductsSmsRoute: ProductsSmsRoute,
+  ProductsTenderAlertsRoute: ProductsTenderAlertsRoute,
+  ServicesAiRoute: ServicesAiRoute,
+  ServicesBlockchainRoute: ServicesBlockchainRoute,
+  ServicesConsultingRoute: ServicesConsultingRoute,
+  ServicesDevelopmentRoute: ServicesDevelopmentRoute,
+  ServicesIotRoute: ServicesIotRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

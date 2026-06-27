@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Progment Solution — Custom Software, AI, Blockchain & IoT" },
+      { name: "description", content: "Progment Solution builds custom software, AI, blockchain and IoT solutions for EdTech, FinTech, Healthcare, Logistics and more." },
+      { name: "author", content: "Progment Solution" },
+      { property: "og:title", content: "Progment Solution" },
+      { property: "og:description", content: "Custom software, AI, blockchain and IoT solutions." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
