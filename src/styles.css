@@ -146,5 +146,29 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: "Open Sans", system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", system-ui, sans-serif;
   }
 }
+
+.nav-link {
+  position: relative;
+  color: var(--foreground);
+  transition: color .25s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 2px;
+  background: var(--brand-green);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .3s ease;
+}
+.nav-link:hover { color: var(--brand-green); }
+.nav-link:hover::after { transform: scaleX(1); }

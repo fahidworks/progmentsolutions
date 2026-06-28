@@ -1,61 +1,89 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
-import { nav, site } from "@/lib/site";
+import { ChevronUp } from "lucide-react";
+import { site } from "@/lib/site";
 
 export function Footer() {
+  const tags = [
+    { label: "Artificial Intelligence", to: "/services/ai" },
+    { label: "Blockchain", to: "/services/blockchain" },
+    { label: "IoT", to: "/services/iot" },
+    { label: "Software Consulting", to: "/services/consulting" },
+    { label: "Software Development", to: "/services/development" },
+    { label: "App Development", to: "/industries/on-demand" },
+    { label: "Web Development", to: "/services/development" },
+  ];
+  const quickLinks = [
+    { label: "Home", to: "/" },
+    { label: "About", to: "/about" },
+    { label: "Products", to: "/products/sms" },
+    { label: "Services", to: "/services/ai" },
+    { label: "Industries", to: "/industries/edtech" },
+    { label: "Our Work", to: "/our-work/consultation" },
+    { label: "Contact", to: "/contact" },
+  ];
   return (
-    <footer className="text-white mt-20" style={{ background: "var(--brand-deep)" }}>
-      <div className="container mx-auto px-4 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative text-white mt-0" style={{ background: "oklch(0.32 0.06 220)" }}>
+      <div className="container mx-auto px-4 py-16 grid gap-12 md:grid-cols-3">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-10 w-10 rounded-lg flex items-center justify-center text-white font-bold" style={{ background: "var(--gradient-bar)" }}>PS</div>
-            <div>
-              <div className="font-bold">{site.name}</div>
-              <div className="text-[11px] opacity-70">{site.tagline}</div>
+          <Link to="/" className="inline-flex items-center gap-2">
+            <div className="h-11 w-11 rounded-md grid place-items-center" style={{ background: "white" }}>
+              <span className="font-black" style={{ color: "var(--brand-green)" }}>PS</span>
             </div>
-          </div>
-          <p className="text-sm opacity-80 leading-relaxed">
-            We help organisations design, build and operate modern software — from custom products to AI, blockchain and IoT solutions.
+            <span className="font-extrabold text-xl"><span style={{ color: "oklch(0.78 0.16 145)" }}>PROG</span>MENT</span>
+          </Link>
+          <div className="h-px bg-white/15 my-6" />
+          <p className="text-sm leading-relaxed opacity-85">
+            {site.name} partners with organisations to design, build and operate modern software — from custom products to AI, blockchain and IoT.
           </p>
-          <div className="flex gap-3 mt-4">
-            <a href="#" aria-label="Facebook" className="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-white/20"><Facebook className="h-4 w-4" /></a>
-            <a href="#" aria-label="Twitter" className="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-white/20"><Twitter className="h-4 w-4" /></a>
-            <a href="#" aria-label="LinkedIn" className="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-white/20"><Linkedin className="h-4 w-4" /></a>
+          <p className="text-sm opacity-85 mt-4">{site.address}</p>
+        </div>
+
+        <div>
+          <h4 className="text-center text-lg font-semibold tracking-wider uppercase">Quick Links</h4>
+          <div className="mx-auto mt-2 h-0.5 w-12" style={{ background: "var(--brand-green)" }} />
+          <ul className="mt-6 space-y-3 text-sm">
+            {quickLinks.map((l) => (
+              <li key={l.to} className="border-b border-white/10 pb-2">
+                <Link to={l.to} className="opacity-85 hover:opacity-100 hover:text-[oklch(0.78_0.16_145)] transition-colors">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-center text-lg font-semibold tracking-wider uppercase">Tags</h4>
+          <div className="mx-auto mt-2 h-0.5 w-12" style={{ background: "var(--brand-green)" }} />
+          <div className="mt-6 flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <Link
+                key={t.label}
+                to={t.to}
+                className="px-3 py-1.5 text-xs uppercase tracking-wide border border-white/25 rounded-sm hover:border-white hover:bg-white/10 transition"
+              >
+                {t.label}
+              </Link>
+            ))}
           </div>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-4">Services</h4>
-          <ul className="space-y-2 text-sm opacity-80">
-            {nav.services.map((i) => (
-              <li key={i.to}><Link to={i.to} className="hover:text-white">{i.label}</Link></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-4">Products</h4>
-          <ul className="space-y-2 text-sm opacity-80">
-            {nav.products.map((i) => (
-              <li key={i.to}><Link to={i.to} className="hover:text-white">{i.label}</Link></li>
-            ))}
-          </ul>
-          <h4 className="font-semibold mt-6 mb-3">Company</h4>
-          <ul className="space-y-2 text-sm opacity-80">
-            <li><Link to="/about" className="hover:text-white">About</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-4">Reach Us</h4>
-          <ul className="space-y-3 text-sm opacity-80">
-            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" /> <span>{site.address}</span></li>
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5" /> <a href={`tel:${site.phone}`} className="hover:text-white">{site.phoneDisplay}</a></li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5" /> <a href={`mailto:${site.email}`} className="hover:text-white break-all">{site.email}</a></li>
-          </ul>
+          <div className="mt-8 text-sm opacity-85 space-y-1">
+            <div><a href={`tel:${site.phone}`} className="hover:text-[oklch(0.78_0.16_145)]">{site.phoneDisplay}</a></div>
+            <div><a href={`mailto:${site.email}`} className="hover:text-[oklch(0.78_0.16_145)] break-all">{site.email}</a></div>
+          </div>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 py-4 text-xs opacity-70 text-center">
-          © {new Date().getFullYear()} {site.name}. All rights reserved.
+
+      <div className="border-t border-white/10" style={{ background: "oklch(0.22 0.05 220)" }}>
+        <div className="container mx-auto px-4 py-4 text-xs opacity-80 text-center relative">
+          Copyright © {new Date().getFullYear()} {site.name}. All rights reserved.
+          <button
+            aria-label="Back to top"
+            onClick={() => typeof window !== "undefined" && window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="absolute right-4 -top-6 h-10 w-10 grid place-items-center text-white shadow-lg hover:opacity-90"
+            style={{ background: "var(--brand-green)" }}
+          >
+            <ChevronUp className="h-5 w-5" />
+          </button>
         </div>
       </div>
     </footer>

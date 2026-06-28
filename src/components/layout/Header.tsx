@@ -34,11 +34,11 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
-          <Link to="/" className="px-3 py-2 text-sm font-medium hover:text-primary">Home</Link>
-          <Link to="/about" className="px-3 py-2 text-sm font-medium hover:text-primary">About</Link>
+          <Link to="/" className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide">Home</Link>
+          <Link to="/about" className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide">About</Link>
           {groups.map((g) => (
             <div key={g.label} className="relative group">
-              <button className="px-3 py-2 text-sm font-medium hover:text-primary inline-flex items-center gap-1">
+              <button className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide inline-flex items-center gap-1">
                 {g.label} <ChevronDown className="h-3 w-3" />
               </button>
               <div className="absolute left-0 top-full pt-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition">
