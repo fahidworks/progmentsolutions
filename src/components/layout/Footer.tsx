@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronUp } from "lucide-react";
-import { nav, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export function Footer() {
   const tags = [
