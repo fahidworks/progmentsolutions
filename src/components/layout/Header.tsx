@@ -19,16 +19,17 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2">
-          <div
-            className="h-10 w-10 rounded-lg flex items-center justify-center text-white font-bold"
-            style={{ background: "var(--gradient-bar)" }}
-          >
-            PS
+        <Link to="/" className="flex items-center gap-3">
+          <div className="h-11 w-11 rounded-md grid place-items-center" style={{ background: "var(--gradient-bar)" }}>
+            <span className="text-white font-black text-lg">PS</span>
           </div>
           <div className="leading-tight">
-            <div className="font-bold text-lg text-foreground">{site.name}</div>
-            <div className="text-[11px] text-muted-foreground">{site.tagline}</div>
+            <div className="font-extrabold text-2xl tracking-tight">
+              <span style={{ color: "var(--brand-green)" }}>PROG</span>
+              <span className="text-foreground">MENT</span>
+              <span style={{ color: "var(--brand-green)" }}> SOLUTION</span>
+            </div>
+            <div className="text-[10px] tracking-widest uppercase text-muted-foreground">{site.tagline}</div>
           </div>
         </Link>
 
