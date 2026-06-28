@@ -80,10 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Progment Solution — Custom Software, AI, Blockchain & IoT" },
       { name: "description", content: "Progment Solution builds custom software, AI, blockchain and IoT solutions for EdTech, FinTech, Healthcare, Logistics and more." },
       { name: "author", content: "Progment Solution" },
-      { property: "og:title", content: "Progment Solution" },
-      { property: "og:description", content: "Custom software, AI, blockchain and IoT solutions." },
+      { property: "og:title", content: "Progment Solution — Custom Software, AI, Blockchain & IoT" },
+      { property: "og:description", content: "Progment Solution builds custom software, AI, blockchain and IoT solutions for EdTech, FinTech, Healthcare, Logistics and more." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Progment Solution — Custom Software, AI, Blockchain & IoT" },
+      { name: "twitter:description", content: "Progment Solution builds custom software, AI, blockchain and IoT solutions for EdTech, FinTech, Healthcare, Logistics and more." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bcb40ab0-1649-49c0-aa3e-02f7ff579c40/id-preview-79e951e3--3ceda13e-99d2-4910-a4ae-e1075651eca1.lovable.app-1782627996340.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bcb40ab0-1649-49c0-aa3e-02f7ff579c40/id-preview-79e951e3--3ceda13e-99d2-4910-a4ae-e1075651eca1.lovable.app-1782627996340.png" },
     ],
     links: [
       {
