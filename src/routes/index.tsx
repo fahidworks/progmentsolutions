@@ -1,24 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
-import { nav, site } from "@/lib/site";
+import { site } from "@/lib/site";
+import aboutPerson from "@/assets/about-person.png";
 import {
   Brain,
   Boxes,
   Cpu,
   Code2,
-  Lightbulb,
-  GraduationCap,
-  Landmark,
-  HeartPulse,
-  ShieldCheck,
-  Truck,
-  Factory,
-  Smartphone,
-  Plane,
   ArrowRight,
   ArrowLeft,
-  CheckCircle2,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -32,25 +23,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
-
-const serviceIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "/services/ai": Brain,
-  "/services/blockchain": Boxes,
-  "/services/iot": Cpu,
-  "/services/consulting": Lightbulb,
-  "/services/development": Code2,
-};
-
-const industryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "/industries/edtech": GraduationCap,
-  "/industries/fintech": Landmark,
-  "/industries/healthcare": HeartPulse,
-  "/industries/insurance": ShieldCheck,
-  "/industries/logistics": Truck,
-  "/industries/manufacturing": Factory,
-  "/industries/on-demand": Smartphone,
-  "/industries/travel": Plane,
-};
 
 function Home() {
   const slides = [
@@ -100,113 +72,71 @@ function Home() {
         </div>
       </section>
 
-      {/* About strip */}
-      <section className="container mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <p className="text-primary font-semibold uppercase text-xs tracking-widest">Who we are</p>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2">A focused team of engineers, designers and product thinkers</h2>
-          <p className="text-muted-foreground mt-4 leading-relaxed">
-            We combine deep technical expertise with a hands-on, collaborative approach. Every engagement starts with understanding your goals — then we build software that fits, scales and lasts.
-          </p>
-          <ul className="mt-6 space-y-3">
-            {[
-              "End-to-end delivery: discovery, design, build, launch and support",
-              "Senior-led teams with real industry experience",
-              "Cloud-native architectures designed for scale and reliability",
-              "Transparent communication and predictable timelines",
-            ].map((t) => (
-              <li key={t} className="flex gap-2 text-sm"><CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />{t}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { n: "50+", l: "Projects delivered" },
-            { n: "12+", l: "Industries served" },
-            { n: "98%", l: "Client retention" },
-            { n: "24/7", l: "Support coverage" },
-          ].map((s) => (
-            <div key={s.l} className="rounded-2xl border bg-card p-6 text-center" style={{ boxShadow: "var(--shadow-card)" }}>
-              <div className="text-3xl font-bold text-primary">{s.n}</div>
-              <div className="text-sm text-muted-foreground mt-1">{s.l}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="bg-muted/40 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-primary font-semibold uppercase text-xs tracking-widest">What we do</p>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2">Services built around your roadmap</h2>
-            <p className="text-muted-foreground mt-3">From early prototypes to enterprise platforms, we cover the full software lifecycle.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            {nav.services.map((s) => {
-              const Icon = serviceIcons[s.to] ?? Code2;
-              return (
-                <Link key={s.to} to={s.to} className="group rounded-2xl bg-card border p-6 hover:border-primary transition" style={{ boxShadow: "var(--shadow-card)" }}>
-                  <div className="h-12 w-12 rounded-lg grid place-items-center text-white mb-4" style={{ background: "var(--gradient-bar)" }}>
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-semibold text-lg">{s.label}</h3>
-                  <p className="text-sm text-muted-foreground mt-2">Strategy, design and engineering tailored to your business outcomes.</p>
-                  <span className="inline-flex items-center gap-1 mt-4 text-sm text-primary font-medium group-hover:gap-2 transition-all">Learn more <ArrowRight className="h-4 w-4" /></span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Products */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-primary font-semibold uppercase text-xs tracking-widest">Our Products</p>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2">Ready-to-deploy platforms</h2>
-          <p className="text-muted-foreground mt-3">Battle-tested products you can roll out quickly and tailor to your needs.</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          {nav.products.map((p) => (
-            <Link key={p.to} to={p.to} className="group rounded-2xl border bg-card p-6 hover:border-primary transition" style={{ boxShadow: "var(--shadow-card)" }}>
-              <h3 className="font-semibold">{p.label}</h3>
-              <p className="text-sm text-muted-foreground mt-2">Modern, modular and ready for production deployments.</p>
-              <span className="inline-flex items-center gap-1 mt-4 text-sm text-primary font-medium group-hover:gap-2 transition-all">Explore <ArrowRight className="h-4 w-4" /></span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section className="bg-muted/40 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-primary font-semibold uppercase text-xs tracking-widest">Industries</p>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2">Deep expertise across sectors</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-            {nav.industries.map((i) => {
-              const Icon = industryIcons[i.to] ?? Boxes;
-              return (
-                <Link key={i.to} to={i.to} className="rounded-xl bg-card border p-5 flex flex-col items-center text-center gap-2 hover:border-primary transition">
-                  <Icon className="h-7 w-7 text-primary" />
-                  <span className="text-sm font-medium">{i.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="text-white" style={{ background: "var(--gradient-hero)" }}>
-        <div className="container mx-auto px-4 py-16 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+      {/* About */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold">Have an idea? Let's build it together.</h2>
-            <p className="opacity-90 mt-2">Reach our team and get a tailored proposal within 48 hours.</p>
+            <h2 className="uppercase text-xs tracking-[0.25em] text-muted-foreground font-semibold">about {site.name.toLowerCase()}</h2>
+            <h3 className="text-3xl md:text-4xl font-bold mt-3 leading-tight">
+              <span style={{ color: "var(--brand-green)" }}>Software Technologies</span> built for ambitious teams
+            </h3>
+            <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                {site.name} brings together senior engineers, designers and product strategists who have shipped software across industries. We work as an extension of your team — focused, accountable and committed to outcomes that move the business.
+              </p>
+              <p>
+                We don't think of ourselves as just programmers or designers. We're creative technologists. Whether you're a startup finding product-market fit or an enterprise modernising a critical system, our job is to make the technology disappear so your customers can simply feel the value.
+              </p>
+            </div>
+            <Link to="/about" className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-md text-white font-semibold transition hover:opacity-90" style={{ background: "var(--gradient-bar)" }}>
+              Read More <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-          <Link to="/contact" className="px-6 py-3 rounded-md bg-white text-foreground font-semibold w-fit">Get in Touch</Link>
+          <div className="relative flex justify-center">
+            {/* organic green blob backdrop */}
+            <svg viewBox="0 0 500 500" className="absolute inset-0 w-full h-full" aria-hidden>
+              <defs>
+                <linearGradient id="blob" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="oklch(0.92 0.10 145)" />
+                  <stop offset="100%" stopColor="oklch(0.78 0.16 145)" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#blob)" d="M421,309Q401,368,346,400Q291,432,231,418Q171,404,116,366Q61,328,68,260Q75,192,113,141Q151,90,217,76Q283,62,338,99Q393,136,418,193Q443,250,421,309Z" />
+              <path fill="oklch(0.62 0.18 145 / 0.55)" d="M390,330Q360,400,283,410Q206,420,150,365Q94,310,110,235Q126,160,195,118Q264,76,326,121Q388,166,408,228Q428,290,390,330Z" />
+            </svg>
+            <img src={aboutPerson} alt="Progment Solution team" loading="lazy" width={768} height={896} className="relative w-full max-w-md object-contain" />
+          </div>
+        </div>
+      </section>
+
+      {/* Diagonal CTA band */}
+      <section className="relative overflow-hidden text-white">
+        <div className="grid md:grid-cols-2 min-h-[260px]">
+          <div className="relative p-10 md:p-16 flex flex-col justify-center" style={{ background: "oklch(0.32 0.06 220)" }}>
+            <p className="uppercase tracking-[0.3em] text-xs md:text-sm font-semibold opacity-90">Get in touch with us</p>
+            <h3 className="text-3xl md:text-4xl font-extrabold mt-3 uppercase tracking-wide">For a Enquiry</h3>
+            {/* diagonal cutout */}
+            <div className="hidden md:block absolute top-0 right-0 h-full w-32" style={{ background: "oklch(0.32 0.06 220)", clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
+            <div className="hidden md:block absolute top-0 right-[-2px] h-full w-32 bg-white" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }} />
+          </div>
+          <div className="relative p-10 md:p-16 flex flex-col justify-center" style={{ background: "var(--brand-green)" }}>
+            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide">We are ready to receive your call</h3>
+            <a href={`tel:${site.phone}`} className="mt-3 text-2xl md:text-4xl font-extrabold tracking-[0.1em] hover:opacity-90">
+              {site.phoneDisplay}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision / Mission / Flexibility */}
+      <section className="py-20 md:py-24">
+        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-x-16 gap-y-10">
+          <ValueBlock title="Vision" body="To be the partner clients trust to turn complex business challenges into reliable, beautifully engineered software." />
+          <ValueBlock title="Flexibility" rows>
+            We adapt to how you work. Sprint with us, augment your team, or hand us a full delivery — every engagement is shaped around your goals and timeline. We listen first, propose options, and only build what genuinely earns its place.
+          </ValueBlock>
+          <ValueBlock title="Mission" body="To craft software that's measurably better — faster to ship, simpler to operate, and durable enough to grow with your business for years." />
+          <ValueBlock title="Quality" body="Senior-led teams, modern architecture, thorough testing and clean code. The little things compound, so we sweat them on every project." />
         </div>
       </section>
     </SiteLayout>
