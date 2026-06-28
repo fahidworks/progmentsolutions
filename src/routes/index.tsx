@@ -25,6 +25,19 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  return <HomeContent />;
+}
+
+function ValueBlock({ title, body, children, rows }: { title: string; body?: string; children?: React.ReactNode; rows?: boolean }) {
+  return (
+    <div className={rows ? "md:row-span-2" : ""}>
+      <h3 className="text-2xl font-bold" style={{ color: "var(--brand-green)" }}>{title}</h3>
+      <p className="mt-3 text-muted-foreground leading-relaxed">{body ?? children}</p>
+    </div>
+  );
+}
+
+function HomeContent() {
   const slides = [
     { title: "Artificial Intelligence", caption: "Predicting the future isn't magic — it's artificial intelligence.", Icon: Brain },
     { title: "Blockchain", caption: "The biggest opportunity set we can think of over the next decade.", Icon: Boxes },
