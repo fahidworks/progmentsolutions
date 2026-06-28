@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { nav, site } from "@/lib/site";
 import {
@@ -16,6 +17,7 @@ import {
   Smartphone,
   Plane,
   ArrowRight,
+  ArrowLeft,
   CheckCircle2,
 } from "lucide-react";
 
@@ -51,32 +53,50 @@ const industryIcons: Record<string, React.ComponentType<{ className?: string }>>
 };
 
 function Home() {
+  const slides = [
+    { title: "Artificial Intelligence", caption: "Predicting the future isn't magic — it's artificial intelligence.", Icon: Brain },
+    { title: "Blockchain", caption: "The biggest opportunity set we can think of over the next decade.", Icon: Boxes },
+    { title: "Internet of Things", caption: "A game-changer for end-to-end business transformation.", Icon: Cpu },
+    { title: "Software Development", caption: "Engineering crafted by people, built to last.", Icon: Code2 },
+  ];
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setActive((i) => (i + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [slides.length]);
+  const go = (d: number) => setActive((i) => (i + d + slides.length) % slides.length);
+
   return (
     <SiteLayout>
-      {/* Hero */}
-      <section className="text-white relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-        <div className="container mx-auto px-4 py-24 lg:py-32 grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <p className="uppercase tracking-widest text-xs opacity-80 mb-3">Software Technologies</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Engineering software<br />that moves your business forward
-            </h1>
-            <p className="mt-6 text-lg opacity-90 max-w-xl">
-              {site.name} partners with organisations of every size to design, build and scale digital products — from AI and blockchain to enterprise platforms and mobile apps.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/contact" className="px-6 py-3 rounded-md bg-white text-foreground font-semibold hover:opacity-90">Start a Project</Link>
-              <Link to="/about" className="px-6 py-3 rounded-md border border-white/40 font-semibold hover:bg-white/10">Learn More</Link>
-            </div>
-          </div>
-          <div className="hidden lg:grid grid-cols-2 gap-4">
-            {[Brain, Boxes, Cpu, Code2].map((Icon, i) => (
-              <div key={i} className="rounded-2xl bg-white/10 backdrop-blur p-8 flex flex-col items-center gap-3 border border-white/15">
-                <Icon className="h-10 w-10" />
-                <span className="text-sm opacity-90">{["AI", "Blockchain", "IoT", "Development"][i]}</span>
+      {/* Hero slider */}
+      <section className="relative text-white overflow-hidden" style={{ background: "var(--gradient-hero)", minHeight: "640px" }}>
+        {/* dotted backdrop */}
+        <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
+        <div className="relative container mx-auto px-4 py-28 lg:py-36 min-h-[640px] flex items-center justify-center text-center">
+          {slides.map((s, i) => {
+            const Icon = s.Icon;
+            return (
+              <div
+                key={s.title}
+                className={`absolute inset-0 flex flex-col items-center justify-center px-6 transition-all duration-700 ${i === active ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+              >
+                <Icon className="h-24 w-24 mb-8 opacity-80" strokeWidth={1} />
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight uppercase">{s.title}</h1>
+                <p className="mt-6 max-w-2xl text-base md:text-lg opacity-90 italic">"{s.caption}"</p>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+        <button aria-label="Previous" onClick={() => go(-1)} className="absolute left-0 top-1/2 -translate-y-1/2 h-14 w-14 grid place-items-center text-white hover:opacity-90" style={{ background: "var(--brand-green)" }}>
+          <ArrowLeft className="h-5 w-5" />
+        </button>
+        <button aria-label="Next" onClick={() => go(1)} className="absolute right-0 top-1/2 -translate-y-1/2 h-14 w-14 grid place-items-center text-white hover:opacity-90" style={{ background: "var(--brand-green)" }}>
+          <ArrowRight className="h-5 w-5" />
+        </button>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {slides.map((_, i) => (
+            <button key={i} aria-label={`Slide ${i + 1}`} onClick={() => setActive(i)} className={`h-2 rounded-full transition-all ${i === active ? "w-8 bg-white" : "w-2 bg-white/40"}`} />
+          ))}
         </div>
       </section>
 
