@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { site } from "@/lib/site";
-import aboutPerson from "@/assets/about-person.png";
+import aboutPerson from "@/assets/about-woman.png.asset.json";
 import {
   Brain,
   Boxes,
@@ -117,7 +117,7 @@ function HomeContent() {
               <path fill="url(#blob)" d="M421,309Q401,368,346,400Q291,432,231,418Q171,404,116,366Q61,328,68,260Q75,192,113,141Q151,90,217,76Q283,62,338,99Q393,136,418,193Q443,250,421,309Z" />
               <path fill="oklch(0.62 0.18 145 / 0.55)" d="M390,330Q360,400,283,410Q206,420,150,365Q94,310,110,235Q126,160,195,118Q264,76,326,121Q388,166,408,228Q428,290,390,330Z" />
             </svg>
-            <img src={aboutPerson} alt="Progment Solution team" loading="lazy" width={768} height={896} className="relative w-full max-w-md object-contain" />
+            <img src={aboutPerson.url} alt="Progment Solution team" loading="lazy" className="relative w-full max-w-md object-contain" />
           </div>
         </div>
       </section>
