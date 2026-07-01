@@ -4,15 +4,9 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
-// Plain TanStack Start setup — targets Node/Vercel by default.
-// Set VITE_START_TARGET to override (e.g. "vercel", "netlify", "node-server").
-const target = (process.env.VITE_START_TARGET ?? "vercel") as
-  | "vercel"
-  | "netlify"
-  | "node-server"
-  | "bun"
-  | "cloudflare-module";
-
+// Plain TanStack Start setup — no Lovable wrappers.
+// Deployment target (Node / Vercel / etc.) is configured downstream by
+// the deploy provider consuming the SSR build output.
 export default defineConfig({
   server: {
     host: true,
@@ -21,7 +15,7 @@ export default defineConfig({
   plugins: [
     tsConfigPaths(),
     tailwindcss(),
-    tanstackStart({ target }),
+    tanstackStart(),
     viteReact(),
   ],
 });
