@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronUp } from "lucide-react";
 import { site } from "@/lib/site";
+import footerLogo from "@/assets/footer-logo.jpg.asset.json";
 
 export function Footer() {
   const tags = [
@@ -25,11 +26,8 @@ export function Footer() {
     <footer className="relative text-white mt-0" style={{ background: "oklch(0.32 0.06 220)" }}>
       <div className="container mx-auto px-4 py-16 grid gap-12 md:grid-cols-3">
         <div>
-          <Link to="/" className="inline-flex items-center gap-2">
-            <div className="h-11 w-11 rounded-md grid place-items-center" style={{ background: "white" }}>
-              <span className="font-black" style={{ color: "var(--brand-green)" }}>PS</span>
-            </div>
-            <span className="font-extrabold text-xl"><span style={{ color: "oklch(0.78 0.16 145)" }}>PROG</span>MENT</span>
+          <Link to="/" className="inline-flex items-center bg-white rounded-md p-3">
+            <img src={footerLogo.url} alt={`${site.name} logo`} className="h-12 w-auto object-contain" />
           </Link>
           <div className="h-px bg-white/15 my-6" />
           <p className="text-sm leading-relaxed opacity-85">
