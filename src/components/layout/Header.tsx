@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { nav, site } from "@/lib/site";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 type Group = { label: string; items: { label: string; to: string }[] };
 
@@ -20,17 +21,7 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3">
-          <div className="h-11 w-11 rounded-md grid place-items-center" style={{ background: "var(--gradient-bar)" }}>
-            <span className="text-white font-black text-lg">PS</span>
-          </div>
-          <div className="leading-tight">
-            <div className="font-extrabold text-2xl tracking-tight">
-              <span style={{ color: "var(--brand-green)" }}>PROG</span>
-              <span className="text-foreground">MENT</span>
-              <span style={{ color: "var(--brand-green)" }}> SOLUTION</span>
-            </div>
-            <div className="text-[10px] tracking-widest uppercase text-muted-foreground">{site.tagline}</div>
-          </div>
+          <img src={logoAsset.url} alt={`${site.name} logo`} className="h-12 md:h-14 w-auto object-contain" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
