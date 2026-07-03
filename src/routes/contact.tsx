@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/layout/PageHero";
 import { site } from "@/lib/site";
@@ -38,10 +39,13 @@ function ContactPage() {
         },
       });
       setStatus("success");
+      toast.success("Message sent! We'll be in touch shortly.");
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+      const msg = err instanceof Error ? err.message : "Something went wrong.";
+      setErrorMsg(msg);
+      toast.error(msg);
     }
   }
 
