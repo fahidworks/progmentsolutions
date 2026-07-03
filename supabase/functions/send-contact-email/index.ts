@@ -67,7 +67,7 @@ ${data.message}
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Progment Contact <onboarding@resend.dev>",
+        from: "info@progmentsolution.com",
         to: ["info@progmentsolution.com"],
         reply_to: data.email,
         subject: `New contact: ${data.subject || data.name}`,
