@@ -27,6 +27,7 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-1">
           <Link to="/" className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide">Home</Link>
           <Link to="/about" className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide">About</Link>
+          <Link to="/resources" className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide">Resources</Link>
           {groups.map((g) => (
             <div key={g.label} className="relative group">
               <button className="nav-link px-3 py-2 text-sm font-semibold uppercase tracking-wide inline-flex items-center gap-1">
@@ -70,6 +71,7 @@ export function Header() {
           <div className="container mx-auto px-4 py-3 flex flex-col">
             <Link to="/" onClick={() => setOpenMobile(false)} className="py-2 font-medium">Home</Link>
             <Link to="/about" onClick={() => setOpenMobile(false)} className="py-2 font-medium">About</Link>
+            <Link to="/resources" onClick={() => setOpenMobile(false)} className="py-2 font-medium">Resources</Link>
             {groups.map((g) => (
               <div key={g.label} className="border-t py-1">
                 <button

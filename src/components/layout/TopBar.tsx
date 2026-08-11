@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Phone, Mail, Facebook, Twitter, Linkedin, LogIn } from "lucide-react";
 import { site } from "@/lib/site";
 
@@ -17,9 +18,9 @@ export function TopBar() {
           </a>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#" className="hidden sm:flex items-center gap-1.5 hover:opacity-90">
+          <Link to="/auth" className="hidden sm:flex items-center gap-1.5 hover:opacity-90">
             <LogIn className="h-4 w-4" /> Sign In
-          </a>
+          </Link>
           <div className="flex items-center gap-2">
             <a aria-label="Facebook" href="#" className="h-8 w-8 rounded-full bg-[oklch(0.55_0.20_260)] grid place-items-center hover:opacity-90 transition"><Facebook className="h-3.5 w-3.5" fill="currentColor" /></a>
             <a aria-label="Twitter" href="#" className="h-8 w-8 rounded-full bg-[oklch(0.70_0.16_230)] grid place-items-center hover:opacity-90 transition"><Twitter className="h-3.5 w-3.5" fill="currentColor" /></a>
