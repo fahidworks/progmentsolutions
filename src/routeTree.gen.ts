@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIotRouteImport } from './routes/services/iot'
 import { Route as ServicesDevelopmentRouteImport } from './routes/services/development'
@@ -33,10 +36,26 @@ import { Route as IndustriesInsuranceRouteImport } from './routes/industries/ins
 import { Route as IndustriesHealthcareRouteImport } from './routes/industries/healthcare'
 import { Route as IndustriesFintechRouteImport } from './routes/industries/fintech'
 import { Route as IndustriesEdtechRouteImport } from './routes/industries/edtech'
+import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
+import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal/index'
+import { Route as AuthenticatedPortalProfileRouteImport } from './routes/_authenticated/portal/profile'
+import { Route as AuthenticatedPortalPayslipsRouteImport } from './routes/_authenticated/portal/payslips'
+import { Route as AuthenticatedPortalPayrollRouteImport } from './routes/_authenticated/portal/payroll'
+import { Route as AuthenticatedPortalLeaveRouteImport } from './routes/_authenticated/portal/leave'
+import { Route as AuthenticatedPortalEmployeesRouteImport } from './routes/_authenticated/portal/employees'
+import { Route as AuthenticatedPortalDocumentsRouteImport } from './routes/_authenticated/portal/documents'
+import { Route as AuthenticatedPortalAttendanceRouteImport } from './routes/_authenticated/portal/attendance'
+import { Route as AuthenticatedPortalAnnouncementsRouteImport } from './routes/_authenticated/portal/announcements'
+import { Route as AuthenticatedPortalAdminRouteImport } from './routes/_authenticated/portal/admin'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -44,9 +63,18 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -154,12 +182,80 @@ const IndustriesEdtechRoute = IndustriesEdtechRouteImport.update({
   path: '/industries/edtech',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPortalIndexRoute =
+  AuthenticatedPortalIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalProfileRoute =
+  AuthenticatedPortalProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalPayslipsRoute =
+  AuthenticatedPortalPayslipsRouteImport.update({
+    id: '/payslips',
+    path: '/payslips',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalPayrollRoute =
+  AuthenticatedPortalPayrollRouteImport.update({
+    id: '/payroll',
+    path: '/payroll',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalLeaveRoute =
+  AuthenticatedPortalLeaveRouteImport.update({
+    id: '/leave',
+    path: '/leave',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalEmployeesRoute =
+  AuthenticatedPortalEmployeesRouteImport.update({
+    id: '/employees',
+    path: '/employees',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalDocumentsRoute =
+  AuthenticatedPortalDocumentsRouteImport.update({
+    id: '/documents',
+    path: '/documents',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalAttendanceRoute =
+  AuthenticatedPortalAttendanceRouteImport.update({
+    id: '/attendance',
+    path: '/attendance',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalAnnouncementsRoute =
+  AuthenticatedPortalAnnouncementsRouteImport.update({
+    id: '/announcements',
+    path: '/announcements',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalAdminRoute =
+  AuthenticatedPortalAdminRouteImport.update({
+    id: '/admin',
+    path: '/admin',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/industries/edtech': typeof IndustriesEdtechRoute
   '/industries/fintech': typeof IndustriesFintechRoute
   '/industries/healthcare': typeof IndustriesHealthcareRoute
@@ -180,11 +276,23 @@ export interface FileRoutesByFullPath {
   '/services/consulting': typeof ServicesConsultingRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/iot': typeof ServicesIotRoute
+  '/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
+  '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
+  '/portal/employees': typeof AuthenticatedPortalEmployeesRoute
+  '/portal/leave': typeof AuthenticatedPortalLeaveRoute
+  '/portal/payroll': typeof AuthenticatedPortalPayrollRoute
+  '/portal/payslips': typeof AuthenticatedPortalPayslipsRoute
+  '/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/industries/edtech': typeof IndustriesEdtechRoute
   '/industries/fintech': typeof IndustriesFintechRoute
@@ -206,13 +314,27 @@ export interface FileRoutesByTo {
   '/services/consulting': typeof ServicesConsultingRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/iot': typeof ServicesIotRoute
+  '/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
+  '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
+  '/portal/employees': typeof AuthenticatedPortalEmployeesRoute
+  '/portal/leave': typeof AuthenticatedPortalLeaveRoute
+  '/portal/payroll': typeof AuthenticatedPortalPayrollRoute
+  '/portal/payslips': typeof AuthenticatedPortalPayslipsRoute
+  '/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/portal': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
   '/industries/edtech': typeof IndustriesEdtechRoute
   '/industries/fintech': typeof IndustriesFintechRoute
   '/industries/healthcare': typeof IndustriesHealthcareRoute
@@ -233,14 +355,27 @@ export interface FileRoutesById {
   '/services/consulting': typeof ServicesConsultingRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/iot': typeof ServicesIotRoute
+  '/_authenticated/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/_authenticated/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/_authenticated/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
+  '/_authenticated/portal/documents': typeof AuthenticatedPortalDocumentsRoute
+  '/_authenticated/portal/employees': typeof AuthenticatedPortalEmployeesRoute
+  '/_authenticated/portal/leave': typeof AuthenticatedPortalLeaveRoute
+  '/_authenticated/portal/payroll': typeof AuthenticatedPortalPayrollRoute
+  '/_authenticated/portal/payslips': typeof AuthenticatedPortalPayslipsRoute
+  '/_authenticated/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/resources'
     | '/sitemap.xml'
+    | '/portal'
     | '/industries/edtech'
     | '/industries/fintech'
     | '/industries/healthcare'
@@ -261,11 +396,23 @@ export interface FileRouteTypes {
     | '/services/consulting'
     | '/services/development'
     | '/services/iot'
+    | '/portal/admin'
+    | '/portal/announcements'
+    | '/portal/attendance'
+    | '/portal/documents'
+    | '/portal/employees'
+    | '/portal/leave'
+    | '/portal/payroll'
+    | '/portal/payslips'
+    | '/portal/profile'
+    | '/portal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/resources'
     | '/sitemap.xml'
     | '/industries/edtech'
     | '/industries/fintech'
@@ -287,12 +434,26 @@ export interface FileRouteTypes {
     | '/services/consulting'
     | '/services/development'
     | '/services/iot'
+    | '/portal/admin'
+    | '/portal/announcements'
+    | '/portal/attendance'
+    | '/portal/documents'
+    | '/portal/employees'
+    | '/portal/leave'
+    | '/portal/payroll'
+    | '/portal/payslips'
+    | '/portal/profile'
+    | '/portal'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/resources'
     | '/sitemap.xml'
+    | '/_authenticated/portal'
     | '/industries/edtech'
     | '/industries/fintech'
     | '/industries/healthcare'
@@ -313,12 +474,25 @@ export interface FileRouteTypes {
     | '/services/consulting'
     | '/services/development'
     | '/services/iot'
+    | '/_authenticated/portal/admin'
+    | '/_authenticated/portal/announcements'
+    | '/_authenticated/portal/attendance'
+    | '/_authenticated/portal/documents'
+    | '/_authenticated/portal/employees'
+    | '/_authenticated/portal/leave'
+    | '/_authenticated/portal/payroll'
+    | '/_authenticated/portal/payslips'
+    | '/_authenticated/portal/profile'
+    | '/_authenticated/portal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   IndustriesEdtechRoute: typeof IndustriesEdtechRoute
   IndustriesFintechRoute: typeof IndustriesFintechRoute
@@ -351,6 +525,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -358,11 +539,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -512,13 +707,133 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesEdtechRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/portal': {
+      id: '/_authenticated/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof AuthenticatedPortalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/': {
+      id: '/_authenticated/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof AuthenticatedPortalIndexRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/profile': {
+      id: '/_authenticated/portal/profile'
+      path: '/profile'
+      fullPath: '/portal/profile'
+      preLoaderRoute: typeof AuthenticatedPortalProfileRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/payslips': {
+      id: '/_authenticated/portal/payslips'
+      path: '/payslips'
+      fullPath: '/portal/payslips'
+      preLoaderRoute: typeof AuthenticatedPortalPayslipsRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/payroll': {
+      id: '/_authenticated/portal/payroll'
+      path: '/payroll'
+      fullPath: '/portal/payroll'
+      preLoaderRoute: typeof AuthenticatedPortalPayrollRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/leave': {
+      id: '/_authenticated/portal/leave'
+      path: '/leave'
+      fullPath: '/portal/leave'
+      preLoaderRoute: typeof AuthenticatedPortalLeaveRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/employees': {
+      id: '/_authenticated/portal/employees'
+      path: '/employees'
+      fullPath: '/portal/employees'
+      preLoaderRoute: typeof AuthenticatedPortalEmployeesRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/documents': {
+      id: '/_authenticated/portal/documents'
+      path: '/documents'
+      fullPath: '/portal/documents'
+      preLoaderRoute: typeof AuthenticatedPortalDocumentsRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/attendance': {
+      id: '/_authenticated/portal/attendance'
+      path: '/attendance'
+      fullPath: '/portal/attendance'
+      preLoaderRoute: typeof AuthenticatedPortalAttendanceRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/announcements': {
+      id: '/_authenticated/portal/announcements'
+      path: '/announcements'
+      fullPath: '/portal/announcements'
+      preLoaderRoute: typeof AuthenticatedPortalAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/admin': {
+      id: '/_authenticated/portal/admin'
+      path: '/admin'
+      fullPath: '/portal/admin'
+      preLoaderRoute: typeof AuthenticatedPortalAdminRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
   }
 }
 
+interface AuthenticatedPortalRouteChildren {
+  AuthenticatedPortalAdminRoute: typeof AuthenticatedPortalAdminRoute
+  AuthenticatedPortalAnnouncementsRoute: typeof AuthenticatedPortalAnnouncementsRoute
+  AuthenticatedPortalAttendanceRoute: typeof AuthenticatedPortalAttendanceRoute
+  AuthenticatedPortalDocumentsRoute: typeof AuthenticatedPortalDocumentsRoute
+  AuthenticatedPortalEmployeesRoute: typeof AuthenticatedPortalEmployeesRoute
+  AuthenticatedPortalLeaveRoute: typeof AuthenticatedPortalLeaveRoute
+  AuthenticatedPortalPayrollRoute: typeof AuthenticatedPortalPayrollRoute
+  AuthenticatedPortalPayslipsRoute: typeof AuthenticatedPortalPayslipsRoute
+  AuthenticatedPortalProfileRoute: typeof AuthenticatedPortalProfileRoute
+  AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
+}
+
+const AuthenticatedPortalRouteChildren: AuthenticatedPortalRouteChildren = {
+  AuthenticatedPortalAdminRoute: AuthenticatedPortalAdminRoute,
+  AuthenticatedPortalAnnouncementsRoute: AuthenticatedPortalAnnouncementsRoute,
+  AuthenticatedPortalAttendanceRoute: AuthenticatedPortalAttendanceRoute,
+  AuthenticatedPortalDocumentsRoute: AuthenticatedPortalDocumentsRoute,
+  AuthenticatedPortalEmployeesRoute: AuthenticatedPortalEmployeesRoute,
+  AuthenticatedPortalLeaveRoute: AuthenticatedPortalLeaveRoute,
+  AuthenticatedPortalPayrollRoute: AuthenticatedPortalPayrollRoute,
+  AuthenticatedPortalPayslipsRoute: AuthenticatedPortalPayslipsRoute,
+  AuthenticatedPortalProfileRoute: AuthenticatedPortalProfileRoute,
+  AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
+}
+
+const AuthenticatedPortalRouteWithChildren =
+  AuthenticatedPortalRoute._addFileChildren(AuthenticatedPortalRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedPortalRoute: typeof AuthenticatedPortalRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedPortalRoute: AuthenticatedPortalRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   IndustriesEdtechRoute: IndustriesEdtechRoute,
   IndustriesFintechRoute: IndustriesFintechRoute,
