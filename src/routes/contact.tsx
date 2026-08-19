@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/layout/PageHero";
-import { site } from "@/lib/site";
+import { site, offices } from "@/lib/site";
 import { submitContact } from "@/lib/contact.functions";
 import { Phone, Mail, MapPin, Loader2, CheckCircle2 } from "lucide-react";
 
@@ -57,15 +57,23 @@ function ContactPage() {
           <div className="rounded-2xl border bg-card p-6 flex gap-4" style={{ boxShadow: "var(--shadow-card)" }}>
             <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}><MapPin className="h-5 w-5" /></div>
             <div>
-              <h3 className="font-semibold">Office</h3>
-              <p className="text-sm text-muted-foreground mt-1">{site.address}</p>
+              <h3 className="font-semibold">Our Offices</h3>
+              <div className="mt-2 space-y-3">
+                {offices.map((o) => (
+                  <div key={o.country}>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-primary">{o.label}</p>
+                    <p className="text-sm text-muted-foreground">{o.address}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="rounded-2xl border bg-card p-6 flex gap-4" style={{ boxShadow: "var(--shadow-card)" }}>
             <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}><Phone className="h-5 w-5" /></div>
             <div>
               <h3 className="font-semibold">Phone</h3>
-              <a href={`tel:${site.phone}`} className="text-sm text-muted-foreground hover:text-primary">{site.phoneDisplay}</a>
+              <a href={`tel:${site.phone}`} className="block text-sm text-muted-foreground hover:text-primary">{site.phoneDisplay}</a>
+              <a href={`tel:${site.phone2}`} className="block text-sm text-muted-foreground hover:text-primary">{site.phone2Display}</a>
             </div>
           </div>
           <div className="rounded-2xl border bg-card p-6 flex gap-4" style={{ boxShadow: "var(--shadow-card)" }}>
@@ -106,16 +114,22 @@ function ContactPage() {
           )}
         </div>
       </section>
-      <section className="container mx-auto px-4 pb-20">
-        <div className="rounded-2xl overflow-hidden border" style={{ boxShadow: "var(--shadow-card)" }}>
-          <iframe
-            title="Office location map"
-            src={site.mapsEmbed}
-            className="w-full h-[400px] border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
+      <section className="container mx-auto px-4 pb-20 grid gap-6 md:grid-cols-2">
+        {offices.map((o) => (
+          <div key={o.country} className="rounded-2xl overflow-hidden border bg-card" style={{ boxShadow: "var(--shadow-card)" }}>
+            <iframe
+              title={`${o.label} office map`}
+              src={o.mapsEmbed}
+              className="w-full h-[300px] border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="p-4">
+              <p className="font-semibold">{o.label}</p>
+              <p className="text-sm text-muted-foreground">{o.address}</p>
+            </div>
+          </div>
+        ))}
       </section>
     </SiteLayout>
   );

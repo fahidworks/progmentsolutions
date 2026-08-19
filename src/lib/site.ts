@@ -3,6 +3,8 @@ export const site = {
   tagline: "Software Technologies Pvt. Ltd.",
   phone: "8519973071",
   phoneDisplay: "+91 85199 73071",
+  phone2: "+63288904660",
+  phone2Display: "+63 288904660",
   email: "info@progmentsolution.com",
   address: "350 AECS Layout, Singasandra, Bangalore",
   mapsEmbed:
@@ -10,6 +12,39 @@ export const site = {
   mapsLink:
     "https://www.google.com/maps/search/?api=1&query=350+AECS+Layout+Singasandra+Bangalore",
 };
+
+export const offices = [
+  {
+    country: "India",
+    label: "Bangalore, India",
+    address: "350 AECS Layout, Singasandra, Bangalore",
+    mapsEmbed:
+      "https://www.google.com/maps?q=350+AECS+Layout+Singasandra+Bangalore&output=embed",
+  },
+  {
+    country: "USA",
+    label: "Washington DC, USA",
+    address: "42899 Smith Sonian Plaza, Washington DC 22408, USA",
+    mapsEmbed:
+      "https://www.google.com/maps?q=42899+Smithsonian+Plaza+Washington+DC+22408+USA&output=embed",
+  },
+  {
+    country: "Japan",
+    label: "Tokyo, Japan",
+    address:
+      "Shibuya Tower 37th Floor, Shibuya Sakura Stage, 1-1 Sakuragaoka, Shibuya-ku, Tokyo 150-0031, Japan",
+    mapsEmbed:
+      "https://www.google.com/maps?q=Shibuya+Sakura+Stage+1-1+Sakuragaoka+Shibuya-ku+Tokyo+150-0031+Japan&output=embed",
+  },
+  {
+    country: "Philippines",
+    label: "Manila, Philippines",
+    address:
+      "11F, Zero-Ten Park, Frabelle Business Center, 111 Rada, Legazpi Village, Makati City, 1229 Metro Manila, Philippines",
+    mapsEmbed:
+      "https://www.google.com/maps?q=Frabelle+Business+Center+111+Rada+Legazpi+Village+Makati+City+Metro+Manila+Philippines&output=embed",
+  },
+];
 
 export const nav = {
   products: [
