@@ -97,6 +97,21 @@ export async function requireStaff(supabase: DB, userId: string): Promise<Viewer
   return viewer;
 }
 
+/** Blocks employees whose account has not yet been approved by an administrator. */
+export async function requireApproved(supabase: DB, userId: string): Promise<Viewer> {
+  const viewer = await getViewer(supabase, userId);
+  if (viewer.isStaff) return viewer;
+  const status = await getAccountStatus(supabase, userId);
+  if (status !== "approved") {
+    throw new Error(
+      status === "rejected"
+        ? "Access denied — your account request was rejected by the administrator."
+        : "Your account is awaiting administrator approval.",
+    );
+  }
+  return viewer;
+}
+
 export async function admin() {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   return supabaseAdmin;
