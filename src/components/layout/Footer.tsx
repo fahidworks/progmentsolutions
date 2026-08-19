@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronUp } from "lucide-react";
-import { site } from "@/lib/site";
+import { site, offices } from "@/lib/site";
 import footerLogo from "@/assets/footer-logo.jpg.asset.json";
 
 export function Footer() {
@@ -33,7 +33,14 @@ export function Footer() {
           <p className="text-sm leading-relaxed opacity-85">
             {site.name} partners with organisations to design, build and operate modern software — from custom products to AI, blockchain and IoT.
           </p>
-          <p className="text-sm opacity-85 mt-4">{site.address}</p>
+          <div className="mt-4 space-y-3">
+            {offices.map((o) => (
+              <div key={o.country} className="text-sm opacity-85">
+                <p className="font-semibold uppercase tracking-wide text-[11px]" style={{ color: "oklch(0.78 0.16 145)" }}>{o.label}</p>
+                <p className="leading-relaxed">{o.address}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div>
@@ -66,6 +73,7 @@ export function Footer() {
           </div>
           <div className="mt-8 text-sm opacity-85 space-y-1">
             <div><a href={`tel:${site.phone}`} className="hover:text-[oklch(0.78_0.16_145)]">{site.phoneDisplay}</a></div>
+            <div><a href={`tel:${site.phone2}`} className="hover:text-[oklch(0.78_0.16_145)]">{site.phone2Display}</a></div>
             <div><a href={`mailto:${site.email}`} className="hover:text-[oklch(0.78_0.16_145)] break-all">{site.email}</a></div>
           </div>
         </div>
