@@ -137,6 +137,9 @@ function HomeContent() {
             <a href={`tel:${site.phone}`} className="mt-3 text-2xl md:text-4xl font-extrabold tracking-[0.1em] hover:opacity-90">
               {site.phoneDisplay}
             </a>
+            <a href={`tel:${site.phone2}`} className="mt-2 text-2xl md:text-4xl font-extrabold tracking-[0.1em] hover:opacity-90">
+              {site.phone2Display}
+            </a>
           </div>
         </div>
       </section>
