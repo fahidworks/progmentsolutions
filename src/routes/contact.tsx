@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/layout/PageHero";
-import { site } from "@/lib/site";
+import { site, offices } from "@/lib/site";
 import { submitContact } from "@/lib/contact.functions";
 import { Phone, Mail, MapPin, Loader2, CheckCircle2 } from "lucide-react";
 
