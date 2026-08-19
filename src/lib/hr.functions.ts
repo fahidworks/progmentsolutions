@@ -6,11 +6,108 @@ import { z } from "zod";
 export const getMe = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { getViewer, provisionAccount } = await import("./hr.server");
+    const { getViewer, provisionAccount, getAccountStatus } = await import("./hr.server");
     const email = String((context.claims as Record<string, unknown>)["email"] ?? "");
     await provisionAccount(context.userId, email);
     const viewer = await getViewer(context.supabase, context.userId);
-    return { userId: viewer.userId, email, role: viewer.role, isStaff: viewer.isStaff, employee: viewer.employee };
+    const accountStatus = viewer.isStaff ? "approved" : await getAccountStatus(context.supabase, context.userId);
+    return {
+      userId: viewer.userId, email, role: viewer.role, isStaff: viewer.isStaff,
+      employee: viewer.employee, accountStatus,
+    };
+  });
+
+/** Verifies the fixed administrator credentials and returns the email to sign in with. */
+export const adminSignIn = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) => z.object({ username: z.string().max(120), password: z.string().max(200) }).parse(d))
+  .handler(async ({ data }) => {
+    const { ADMIN_USERNAME, ADMIN_PASSWORD, ensureAdminUser } = await import("./hr.server");
+    if (data.username.trim() !== ADMIN_USERNAME || data.password !== ADMIN_PASSWORD) {
+      throw new Error("Wrong username or password — access denied");
+    }
+    const email = await ensureAdminUser();
+    return { email };
+  });
+
+export const listAccounts = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { requireStaff } = await import("./hr.server");
+    await requireStaff(context.supabase, context.userId);
+    const { data, error } = await context.supabase
+      .from("portal_accounts").select("*").order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  });
+
+export const decideAccount = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid(), status: z.enum(["approved", "rejected"]) }).parse(d))
+  .handler(async ({ data, context }) => {
+    const { requireStaff, admin, audit } = await import("./hr.server");
+    await requireStaff(context.supabase, context.userId);
+    const db = await admin();
+    const { data: account, error } = await db.from("portal_accounts")
+      .update({ status: data.status, decided_by: context.userId, decided_at: new Date().toISOString() })
+      .eq("id", data.id).select("user_id, email").single();
+    if (error) throw new Error(error.message);
+    if (data.status === "approved" && account) {
+      const { data: employee } = await db.from("employees")
+        .select("id, user_id").eq("email", account.email.toLowerCase()).maybeSingle();
+      if (employee && !employee.user_id) {
+        await db.from("employees").update({ user_id: account.user_id }).eq("id", employee.id);
+      }
+    }
+    await audit(context.userId, `account.${data.status}`, "portal_accounts", data.id, { email: account?.email });
+    return { ok: true };
+  });
+
+/** Staff upload of a payslip / paycheck / document file for an employee (or company-wide). */
+export const uploadDocumentFile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({
+    title: z.string().min(1).max(160),
+    document_type: z.string().min(1).max(60),
+    employee_id: z.string().uuid().optional().nullable(),
+    is_company_wide: z.boolean().default(false),
+    file_name: z.string().min(1).max(200),
+    file_base64: z.string().min(1).max(14_000_000),
+    content_type: z.string().max(120).default("application/octet-stream"),
+  }).parse(d))
+  .handler(async ({ data, context }) => {
+    const { requireStaff, admin, audit } = await import("./hr.server");
+    await requireStaff(context.supabase, context.userId);
+    const db = await admin();
+    const bytes = Uint8Array.from(atob(data.file_base64), (c) => c.charCodeAt(0));
+    const safe = data.file_name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const path = `${data.is_company_wide ? "company" : data.employee_id}/${Date.now()}-${safe}`;
+    const { error: upErr } = await db.storage.from("employee-documents")
+      .upload(path, bytes, { contentType: data.content_type, upsert: false });
+    if (upErr) throw new Error(upErr.message);
+    const { error } = await db.from("documents").insert({
+      title: data.title, document_type: data.document_type,
+      employee_id: data.is_company_wide ? null : data.employee_id ?? null,
+      is_company_wide: data.is_company_wide, file_path: path, uploaded_by: context.userId,
+    });
+    if (error) throw new Error(error.message);
+    await audit(context.userId, "document.uploaded", "documents", data.employee_id ?? undefined, { title: data.title });
+    return { ok: true };
+  });
+
+/** Returns a short-lived download link, only if the caller is allowed to see the document. */
+export const getDocumentLink = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    const { requireApproved, admin } = await import("./hr.server");
+    await requireApproved(context.supabase, context.userId);
+    const { data: doc } = await context.supabase.from("documents").select("file_path").eq("id", data.id).maybeSingle();
+    if (!doc) throw new Error("Document not available");
+    if (/^https?:\/\//i.test(doc.file_path)) return { url: doc.file_path };
+    const db = await admin();
+    const { data: signed, error } = await db.storage.from("employee-documents").createSignedUrl(doc.file_path, 300);
+    if (error || !signed) throw new Error(error?.message ?? "Unable to prepare download");
+    return { url: signed.signedUrl };
   });
 
 export const listDepartments = createServerFn({ method: "GET" })
@@ -218,6 +315,8 @@ export const approvePayroll = createServerFn({ method: "POST" })
 export const listMyPayslips = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { requireApproved } = await import("./hr.server");
+    await requireApproved(context.supabase, context.userId);
     const { data, error } = await context.supabase
       .from("payslips")
       .select("*, payrolls(payroll_month, payroll_year, gross_salary, total_deductions, net_salary, status)")
@@ -327,6 +426,8 @@ export const decideLeave = createServerFn({ method: "POST" })
 export const listDocuments = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { requireApproved } = await import("./hr.server");
+    await requireApproved(context.supabase, context.userId);
     const { data, error } = await context.supabase.from("documents").select("*").order("uploaded_at", { ascending: false });
     if (error) throw new Error(error.message);
     return data ?? [];
@@ -430,8 +531,8 @@ export const getAdminStats = createServerFn({ method: "GET" })
 export const getEmployeeDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { getViewer } = await import("./hr.server");
-    const viewer = await getViewer(context.supabase, context.userId);
+    const { requireApproved } = await import("./hr.server");
+    const viewer = await requireApproved(context.supabase, context.userId);
     if (!viewer.employee) return null;
     const now = new Date();
     const month = now.getMonth() + 1, year = now.getFullYear();
