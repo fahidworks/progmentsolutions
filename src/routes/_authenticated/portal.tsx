@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import {
   LayoutDashboard, FileText, CalendarCheck, PlaneTakeoff, FolderLock, Megaphone,
-  User, Users, Wallet, ShieldCheck, LogOut, Menu, X, ArrowLeft,
+  User, Users, Wallet, ShieldCheck, LogOut, Menu, X, ArrowLeft, UserCheck, Clock,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/hooks/use-hr";
@@ -26,6 +26,7 @@ const employeeLinks = [
 
 const adminLinks = [
   { to: "/portal/admin", label: "Admin Dashboard", icon: ShieldCheck },
+  { to: "/portal/approvals", label: "Account approvals", icon: UserCheck },
   { to: "/portal/employees", label: "Employees", icon: Users },
   { to: "/portal/payroll", label: "Payroll", icon: Wallet },
 ];
@@ -96,7 +97,21 @@ function PortalLayout() {
           {open && <div className="lg:hidden border-t p-3">{nav}</div>}
         </header>
         <main className="p-4 lg:p-8 max-w-7xl">
-          <Outlet />
+          {!isLoading && me && !me.isStaff && me.accountStatus !== "approved" ? (
+            <div className="mx-auto max-w-lg rounded-xl border bg-card p-8 text-center shadow-sm">
+              <Clock className="mx-auto h-8 w-8 text-primary" />
+              <h2 className="mt-3 text-lg font-semibold">
+                {me.accountStatus === "rejected" ? "Access denied" : "Awaiting administrator approval"}
+              </h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {me.accountStatus === "rejected"
+                  ? "Your account request was rejected by the administrator. Please contact HR."
+                  : "Your sign-up has been received. You will be able to view your payslips, attendance and documents once an administrator approves your account."}
+              </p>
+            </div>
+          ) : (
+            <Outlet />
+          )}
         </main>
       </div>
     </div>
