@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { adminSignIn } from "@/lib/hr.functions";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +27,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
+  const verifyAdmin = useServerFn(adminSignIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,11 +41,24 @@ function AuthPage() {
   async function signIn(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
-    setLoading(false);
-    if (error) return toast.error(error.message);
-    toast.success("Signed in");
-    navigate({ to: "/portal", replace: true });
+    const identifier = email.trim();
+    try {
+      // Administrators sign in with a username (no "@"); employees use their work email.
+      let loginEmail = identifier.toLowerCase();
+      const isAdminLogin = !identifier.includes("@");
+      if (isAdminLogin) {
+        const res = await verifyAdmin({ data: { username: identifier, password } });
+        loginEmail = res.email;
+      }
+      const { error } = await supabase.auth.signInWithPassword({ email: loginEmail, password });
+      if (error) throw new Error(isAdminLogin ? "Wrong username or password — access denied" : error.message);
+      toast.success("Signed in");
+      navigate({ to: isAdminLogin ? "/portal/admin" : "/portal", replace: true });
+    } catch (err) {
+      toast.error((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function signUp(e: React.FormEvent) {
@@ -83,7 +99,7 @@ function AuthPage() {
 
               <TabsContent value="signin">
                 <form onSubmit={signIn} className="space-y-4 pt-4">
-                  <Field id="si-email" label="Work email" type="email" value={email} onChange={setEmail} />
+                  <Field id="si-email" label="Work email or admin username" type="text" value={email} onChange={setEmail} />
                   <Field id="si-password" label="Password" type="password" value={password} onChange={setPassword} />
                   <Button className="w-full" disabled={loading}>{loading ? "Signing in…" : "Sign In"}</Button>
                 </form>
