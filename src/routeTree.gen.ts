@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -45,6 +46,7 @@ import { Route as AuthenticatedPortalLeaveRouteImport } from './routes/_authenti
 import { Route as AuthenticatedPortalEmployeesRouteImport } from './routes/_authenticated/portal/employees'
 import { Route as AuthenticatedPortalDocumentsRouteImport } from './routes/_authenticated/portal/documents'
 import { Route as AuthenticatedPortalAttendanceRouteImport } from './routes/_authenticated/portal/attendance'
+import { Route as AuthenticatedPortalApprovalsRouteImport } from './routes/_authenticated/portal/approvals'
 import { Route as AuthenticatedPortalAnnouncementsRouteImport } from './routes/_authenticated/portal/announcements'
 import { Route as AuthenticatedPortalAdminRouteImport } from './routes/_authenticated/portal/admin'
 
@@ -66,6 +68,11 @@ const ContactRoute = ContactRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -235,6 +242,12 @@ const AuthenticatedPortalAttendanceRoute =
     path: '/attendance',
     getParentRoute: () => AuthenticatedPortalRoute,
   } as any)
+const AuthenticatedPortalApprovalsRoute =
+  AuthenticatedPortalApprovalsRouteImport.update({
+    id: '/approvals',
+    path: '/approvals',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
 const AuthenticatedPortalAnnouncementsRoute =
   AuthenticatedPortalAnnouncementsRouteImport.update({
     id: '/announcements',
@@ -251,6 +264,7 @@ const AuthenticatedPortalAdminRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/resources': typeof ResourcesRoute
@@ -278,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/services/iot': typeof ServicesIotRoute
   '/portal/admin': typeof AuthenticatedPortalAdminRoute
   '/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/portal/approvals': typeof AuthenticatedPortalApprovalsRoute
   '/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
   '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal/employees': typeof AuthenticatedPortalEmployeesRoute
@@ -290,6 +305,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/resources': typeof ResourcesRoute
@@ -316,6 +332,7 @@ export interface FileRoutesByTo {
   '/services/iot': typeof ServicesIotRoute
   '/portal/admin': typeof AuthenticatedPortalAdminRoute
   '/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/portal/approvals': typeof AuthenticatedPortalApprovalsRoute
   '/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
   '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal/employees': typeof AuthenticatedPortalEmployeesRoute
@@ -330,6 +347,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/resources': typeof ResourcesRoute
@@ -357,6 +375,7 @@ export interface FileRoutesById {
   '/services/iot': typeof ServicesIotRoute
   '/_authenticated/portal/admin': typeof AuthenticatedPortalAdminRoute
   '/_authenticated/portal/announcements': typeof AuthenticatedPortalAnnouncementsRoute
+  '/_authenticated/portal/approvals': typeof AuthenticatedPortalApprovalsRoute
   '/_authenticated/portal/attendance': typeof AuthenticatedPortalAttendanceRoute
   '/_authenticated/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/_authenticated/portal/employees': typeof AuthenticatedPortalEmployeesRoute
@@ -371,6 +390,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/auth'
     | '/contact'
     | '/resources'
@@ -398,6 +418,7 @@ export interface FileRouteTypes {
     | '/services/iot'
     | '/portal/admin'
     | '/portal/announcements'
+    | '/portal/approvals'
     | '/portal/attendance'
     | '/portal/documents'
     | '/portal/employees'
@@ -410,6 +431,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/admin'
     | '/auth'
     | '/contact'
     | '/resources'
@@ -436,6 +458,7 @@ export interface FileRouteTypes {
     | '/services/iot'
     | '/portal/admin'
     | '/portal/announcements'
+    | '/portal/approvals'
     | '/portal/attendance'
     | '/portal/documents'
     | '/portal/employees'
@@ -449,6 +472,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/about'
+    | '/admin'
     | '/auth'
     | '/contact'
     | '/resources'
@@ -476,6 +500,7 @@ export interface FileRouteTypes {
     | '/services/iot'
     | '/_authenticated/portal/admin'
     | '/_authenticated/portal/announcements'
+    | '/_authenticated/portal/approvals'
     | '/_authenticated/portal/attendance'
     | '/_authenticated/portal/documents'
     | '/_authenticated/portal/employees'
@@ -490,6 +515,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   ResourcesRoute: typeof ResourcesRoute
@@ -544,6 +570,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -770,6 +803,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalAttendanceRouteImport
       parentRoute: typeof AuthenticatedPortalRoute
     }
+    '/_authenticated/portal/approvals': {
+      id: '/_authenticated/portal/approvals'
+      path: '/approvals'
+      fullPath: '/portal/approvals'
+      preLoaderRoute: typeof AuthenticatedPortalApprovalsRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
     '/_authenticated/portal/announcements': {
       id: '/_authenticated/portal/announcements'
       path: '/announcements'
@@ -790,6 +830,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedPortalRouteChildren {
   AuthenticatedPortalAdminRoute: typeof AuthenticatedPortalAdminRoute
   AuthenticatedPortalAnnouncementsRoute: typeof AuthenticatedPortalAnnouncementsRoute
+  AuthenticatedPortalApprovalsRoute: typeof AuthenticatedPortalApprovalsRoute
   AuthenticatedPortalAttendanceRoute: typeof AuthenticatedPortalAttendanceRoute
   AuthenticatedPortalDocumentsRoute: typeof AuthenticatedPortalDocumentsRoute
   AuthenticatedPortalEmployeesRoute: typeof AuthenticatedPortalEmployeesRoute
@@ -803,6 +844,7 @@ interface AuthenticatedPortalRouteChildren {
 const AuthenticatedPortalRouteChildren: AuthenticatedPortalRouteChildren = {
   AuthenticatedPortalAdminRoute: AuthenticatedPortalAdminRoute,
   AuthenticatedPortalAnnouncementsRoute: AuthenticatedPortalAnnouncementsRoute,
+  AuthenticatedPortalApprovalsRoute: AuthenticatedPortalApprovalsRoute,
   AuthenticatedPortalAttendanceRoute: AuthenticatedPortalAttendanceRoute,
   AuthenticatedPortalDocumentsRoute: AuthenticatedPortalDocumentsRoute,
   AuthenticatedPortalEmployeesRoute: AuthenticatedPortalEmployeesRoute,
@@ -831,6 +873,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   ResourcesRoute: ResourcesRoute,
