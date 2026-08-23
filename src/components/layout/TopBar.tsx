@@ -22,9 +22,9 @@ export function TopBar() {
             <LogIn className="h-4 w-4" /> Sign In
           </Link>
           <div className="flex items-center gap-2">
-            <a aria-label="Facebook" href="#" className="h-8 w-8 rounded-full bg-[oklch(0.55_0.20_260)] grid place-items-center hover:opacity-90 transition"><Facebook className="h-3.5 w-3.5" fill="currentColor" /></a>
-            <a aria-label="Twitter" href="#" className="h-8 w-8 rounded-full bg-[oklch(0.70_0.16_230)] grid place-items-center hover:opacity-90 transition"><Twitter className="h-3.5 w-3.5" fill="currentColor" /></a>
-            <a aria-label="LinkedIn" href="#" className="h-8 w-8 rounded-full bg-[oklch(0.50_0.15_245)] grid place-items-center hover:opacity-90 transition"><Linkedin className="h-3.5 w-3.5" fill="currentColor" /></a>
+            <a aria-label="Facebook" href="https://www.facebook.com/profile.php?id=61593732389674" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.55_0.20_260)] grid place-items-center hover:opacity-90 transition"><Facebook className="h-3.5 w-3.5" fill="currentColor" /></a>
+            <a aria-label="Twitter" href="https://x.com/ProgmentSoltn" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.70_0.16_230)] grid place-items-center hover:opacity-90 transition"><Twitter className="h-3.5 w-3.5" fill="currentColor" /></a>
+            <a aria-label="LinkedIn" href="https://www.linkedin.com/in/progment-us-9b3561430/" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.50_0.15_245)] grid place-items-center hover:opacity-90 transition"><Linkedin className="h-3.5 w-3.5" fill="currentColor" /></a>
           </div>
         </div>
       </div>
