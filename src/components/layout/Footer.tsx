@@ -1,3 +1,4 @@
+import { MailLink } from "@/components/MailLink";
 import { Link } from "@tanstack/react-router";
 import { ChevronUp } from "lucide-react";
 import { site, offices } from "@/lib/site";

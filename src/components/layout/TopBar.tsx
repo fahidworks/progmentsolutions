@@ -1,3 +1,4 @@
+import { MailLink } from "@/components/MailLink";
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, Facebook, Twitter, Linkedin, LogIn } from "lucide-react";
 import { site } from "@/lib/site";
