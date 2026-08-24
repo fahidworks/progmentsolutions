@@ -5,13 +5,13 @@ export const site = {
   phoneDisplay: "+91 85199 73071",
   phone2: "+63288904660",
   phone2Display: "+63 288904660",
-  phone3: "+15746443071",
-  phone3Display: "+1 (574) 644-3071",
+  phone3: "+15736443071",
+  phone3Display: "+1 (573) 644-3071",
 
   headerPhone: {
     ind: { label: "IND", number: "+91 85199 73071", tel: "8519973071" },
     phl: { label: "PHL", number: "+63 288904660", tel: "+63288904660" },
-    usa: { label: "USA", number: "+1 (574) 644-3071", tel: "+15746443071" },
+    usa: { label: "USA", number: "+1 (574) 644-3071", tel: "+15736443071" },
   },
   email: "info@progmentsolution.com",
   address: "350 AECS Layout, Singasandra, Bangalore",
