@@ -74,7 +74,7 @@ function ContactPage() {
             <div>
               <h3 className="font-semibold">Phone</h3>
               <a href={`tel:${site.phone}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">IND:</span> {site.phoneDisplay}</a>
-              <a href={`tel:${site.phone2}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">JAP:</span> {site.phone2Display}</a>
+              <a href={`tel:${site.phone2}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">PHL:</span> {site.phone2Display}</a>
               <a href={`tel:${site.phone3}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">USA:</span> {site.phone3Display}</a>
             </div>
 
