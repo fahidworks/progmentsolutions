@@ -72,9 +72,11 @@ function ContactPage() {
             <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}><Phone className="h-5 w-5" /></div>
             <div>
               <h3 className="font-semibold">Phone</h3>
-              <a href={`tel:${site.phone}`} className="block text-sm text-muted-foreground hover:text-primary">{site.phoneDisplay}</a>
-              <a href={`tel:${site.phone2}`} className="block text-sm text-muted-foreground hover:text-primary">{site.phone2Display}</a>
+              <a href={`tel:${site.phone}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">IND:</span> {site.phoneDisplay}</a>
+              <a href={`tel:${site.phone2}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">JAP:</span> {site.phone2Display}</a>
+              <a href={`tel:${site.phone3}`} className="block text-sm text-muted-foreground hover:text-primary"><span className="font-semibold">USA:</span> {site.phone3Display}</a>
             </div>
+
           </div>
           <div className="rounded-2xl border bg-card p-6 flex gap-4" style={{ boxShadow: "var(--shadow-card)" }}>
             <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}><Mail className="h-5 w-5" /></div>

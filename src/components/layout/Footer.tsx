@@ -72,10 +72,12 @@ export function Footer() {
             ))}
           </div>
           <div className="mt-8 text-sm opacity-85 space-y-1">
-            <div><a href={`tel:${site.phone}`} className="hover:text-[oklch(0.78_0.16_145)]">{site.phoneDisplay}</a></div>
-            <div><a href={`tel:${site.phone2}`} className="hover:text-[oklch(0.78_0.16_145)]">{site.phone2Display}</a></div>
+            <div><a href={`tel:${site.phone}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">IND:</span> {site.phoneDisplay}</a></div>
+            <div><a href={`tel:${site.phone2}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">JAP:</span> {site.phone2Display}</a></div>
+            <div><a href={`tel:${site.phone3}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">USA:</span> {site.phone3Display}</a></div>
             <div><a href={`mailto:${site.email}`} className="hover:text-[oklch(0.78_0.16_145)] break-all">{site.email}</a></div>
           </div>
+
         </div>
       </div>
 
