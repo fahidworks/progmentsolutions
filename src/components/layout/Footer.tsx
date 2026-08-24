@@ -75,7 +75,7 @@ export function Footer() {
             <div><a href={`tel:${site.phone}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">IND:</span> {site.phoneDisplay}</a></div>
             <div><a href={`tel:${site.phone2}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">JAP:</span> {site.phone2Display}</a></div>
             <div><a href={`tel:${site.phone3}`} className="hover:text-[oklch(0.78_0.16_145)]"><span className="font-semibold">USA:</span> {site.phone3Display}</a></div>
-            <div><a href={`mailto:${site.email}`} className="hover:text-[oklch(0.78_0.16_145)] break-all">{site.email}</a></div>
+            <div><MailLink className="hover:text-[oklch(0.78_0.16_145)] break-all" /></div>
           </div>
 
         </div>
