@@ -9,10 +9,14 @@ export function TopBar() {
       style={{ background: "var(--gradient-bar)" }}
     >
       <div className="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-6">
-          <a href={`tel:${site.phone}`} className="flex items-center gap-2 hover:opacity-90">
-            <Phone className="h-4 w-4" /> {site.phoneDisplay}
-          </a>
+        <div className="flex flex-wrap items-center gap-4">
+          {Object.entries(site.headerPhone).map(([key, { label, number, tel }]) => (
+            <a key={key} href={`tel:${tel}`} className="flex items-center gap-1.5 hover:opacity-90">
+              <Phone className="h-4 w-4" />
+              <span className="font-semibold tracking-wide">{label}:</span>
+              <span>{number}</span>
+            </a>
+          ))}
           <a href={`mailto:${site.email}`} className="flex items-center gap-2 hover:opacity-90">
             <Mail className="h-4 w-4" /> {site.email}
           </a>
