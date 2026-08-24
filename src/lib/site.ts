@@ -10,7 +10,7 @@ export const site = {
 
   headerPhone: {
     ind: { label: "IND", number: "+91 85199 73071", tel: "8519973071" },
-    jap: { label: "JAP", number: "+63 288904660", tel: "+63288904660" },
+    phl: { label: "PHL", number: "+63 288904660", tel: "+63288904660" },
     usa: { label: "USA", number: "+1 (574) 644-3071", tel: "+15746443071" },
   },
   email: "info@progmentsolution.com",
