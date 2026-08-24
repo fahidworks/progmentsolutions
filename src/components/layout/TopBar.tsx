@@ -1,3 +1,4 @@
+import { MailLink } from "@/components/MailLink";
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, Facebook, Twitter, Linkedin, LogIn } from "lucide-react";
 import { site } from "@/lib/site";
@@ -17,9 +18,9 @@ export function TopBar() {
               <span>{number}</span>
             </a>
           ))}
-          <a href={`mailto:${site.email}`} className="flex items-center gap-2 hover:opacity-90">
-            <Mail className="h-4 w-4" /> {site.email}
-          </a>
+          <MailLink className="flex items-center gap-2 hover:opacity-90">
+            <><Mail className="h-4 w-4" /> {site.email}</>
+          </MailLink>
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="hidden sm:flex items-center gap-1.5 hover:opacity-90">

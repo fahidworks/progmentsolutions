@@ -1,3 +1,4 @@
+import { MailLink } from "@/components/MailLink";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -82,7 +83,7 @@ function ContactPage() {
             <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}><Mail className="h-5 w-5" /></div>
             <div>
               <h3 className="font-semibold">Email</h3>
-              <a href={`mailto:${site.email}`} className="text-sm text-muted-foreground hover:text-primary break-all">{site.email}</a>
+              <MailLink className="text-sm text-muted-foreground hover:text-primary break-all" />
             </div>
           </div>
         </div>
