@@ -6,7 +6,8 @@ import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/layout/PageHero";
 import { site, offices } from "@/lib/site";
 import { submitContact } from "@/lib/contact.functions";
-import { Phone, Mail, MapPin, Loader2, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Loader2, CheckCircle2, Facebook, Linkedin, Instagram } from "lucide-react";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
