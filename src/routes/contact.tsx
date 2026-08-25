@@ -87,6 +87,28 @@ function ContactPage() {
               <MailLink className="text-sm text-muted-foreground hover:text-primary break-all" />
             </div>
           </div>
+          <div className="rounded-2xl border bg-card p-6 flex gap-4" style={{ boxShadow: "var(--shadow-card)" }}>
+            <div className="h-12 w-12 rounded-lg grid place-items-center text-white flex-shrink-0" style={{ background: "var(--gradient-bar)" }}>
+              <Facebook className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 className="font-semibold">Social Media</h3>
+              <div className="mt-2 space-y-1.5">
+                <a href="https://www.facebook.com/profile.php?id=61593732389674" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                  <Facebook className="h-3.5 w-3.5" /> progment_solution
+                </a>
+                <a href="https://x.com/ProgmentSoltn" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> ProgmentSoltn
+                </a>
+                <a href="https://www.linkedin.com/in/progment-solution-9b3561430/" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                  <Linkedin className="h-3.5 w-3.5" /> progment-solution-9b3561430
+                </a>
+                <a href="https://www.instagram.com/progment_solution" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                  <Instagram className="h-3.5 w-3.5" /> progment_solution
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="lg:col-span-2 rounded-2xl border bg-card p-6 md:p-8" style={{ boxShadow: "var(--shadow-card)" }}>
           {status === "success" ? (
