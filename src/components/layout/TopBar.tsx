@@ -1,6 +1,6 @@
 import { MailLink } from "@/components/MailLink";
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, Facebook, Twitter, Linkedin, Instagram, LogIn } from "lucide-react";
+import { Phone, Mail, Facebook, Linkedin, Instagram, LogIn } from "lucide-react";
 import { site } from "@/lib/site";
 
 export function TopBar() {
@@ -28,7 +28,11 @@ export function TopBar() {
           </Link>
           <div className="flex items-center gap-2">
             <a aria-label="Facebook" href="https://www.facebook.com/profile.php?id=61593732389674" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.55_0.20_260)] grid place-items-center hover:opacity-90 transition"><Facebook className="h-3.5 w-3.5" fill="currentColor" /></a>
-            <a aria-label="Twitter" href="https://x.com/ProgmentSoltn" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.70_0.16_230)] grid place-items-center hover:opacity-90 transition"><Twitter className="h-3.5 w-3.5" fill="currentColor" /></a>
+            <a aria-label="X" href="https://x.com/ProgmentSoltn" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-black grid place-items-center hover:opacity-90 transition">
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" style={{ color: "white" }}>
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            </a>
             <a aria-label="LinkedIn" href="https://www.linkedin.com/in/progment-solution-9b3561430/" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-[oklch(0.50_0.15_245)] grid place-items-center hover:opacity-90 transition"><Linkedin className="h-3.5 w-3.5" fill="currentColor" /></a>
             <a aria-label="Instagram" href="https://www.instagram.com/progment_solution" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full grid place-items-center hover:opacity-90 transition" style={{ background: "linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5)" }}><Instagram className="h-3.5 w-3.5 text-white" /></a>
           </div>
